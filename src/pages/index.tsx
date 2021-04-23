@@ -6,8 +6,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 import { api } from '../services/api'
-import { useContext } from 'react'
-import { PlayerContext } from '../contexts/PlayerContext'
+import { usePlayer } from '../hooks/usePlayer'
 
 import styles from './home.module.scss'
 
@@ -28,7 +27,7 @@ interface HomeProps {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { play } = useContext(PlayerContext)
+  const { play } = usePlayer()
 
   return (
     <div className={styles.homepage}>

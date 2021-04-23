@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Slider from 'rc-slider'
-import { useContext, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-import { PlayerContext } from '../../contexts/PlayerContext'
+import { usePlayer } from '../../hooks/usePlayer'
 
 import 'rc-slider/assets/index.css'
 import styles from './styles.module.scss'
@@ -16,7 +16,7 @@ export function Player() {
     isPlaying, 
     togglePlay,
     setPlayingState
-  } = useContext(PlayerContext)
+  } = usePlayer()
 
   const episode = episodeList[currentEpisodeIndex]
 
