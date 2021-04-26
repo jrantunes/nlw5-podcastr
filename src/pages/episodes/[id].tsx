@@ -97,7 +97,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { id } = ctx.params
   
-  const { data } = await api.get(`/episodes/${id}`)
+  const { data } = await api.get(`episodes/${id}`)
   
   const episode = {
     id: data.id,
