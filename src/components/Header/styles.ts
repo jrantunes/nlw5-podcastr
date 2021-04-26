@@ -33,18 +33,18 @@ export const Container = styled.header<ContainerProps>`
     text-transform: capitalize;
   }
 
-  @media(max-width: 620px) {
-    span {
-      display: none;
-    }
-  }
-
-  @media(max-width: 500px) {
+  @media(max-width: 720px) {
     p {
       display: none;
     }
 
     justify-content: center;
     gap: 2rem;
+  }
+
+  @media(max-width: 420px) {
+    span {
+      display: none;
+    }
   }
 `
