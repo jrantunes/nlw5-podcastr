@@ -6,9 +6,13 @@ import { usePlayer } from '../../hooks/usePlayer'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 
 import 'rc-slider/assets/index.css'
-import styles from './styles.module.scss'
+import { Container, CurrentEpisode, EmptyPlayer, Progress, Buttons } from './styles'
 
-export function Player() {
+interface PlayerProps {
+  isDarkMode: boolean;
+}
+
+export function Player({ isDarkMode }: PlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [progress, setProgress] = useState(0);
 
@@ -65,14 +69,14 @@ export function Player() {
   }
 
   return (
-    <div className={styles.playerContainer}>
+    <Container isDarkMode={isDarkMode}>
       <header>
         <img src="/playing.svg" alt="Tocando agora"/>
         <strong>Tocando agora</strong>
       </header>
 
       { episode ? (
-        <div className={styles.currentEpisode}>
+        <CurrentEpisode>
           <Image
             width={592}
             height={592}
@@ -81,17 +85,18 @@ export function Player() {
           />
           <strong>{episode.title}</strong>
           <span>{episode.members}</span>
-        </div>
+        </CurrentEpisode>
       ) : (
-        <div className={styles.emptyPlayer}>
+        <EmptyPlayer>
           <strong>Selecione um podcast para ouvir</strong>
-        </div>
+        </EmptyPlayer>
       ) }
 
-      <footer className={!episode ? styles.empty : ''}>
-        <div className={styles.progress}>
+      <footer className={!episode ? 'empty' : ''}>
+        { episode && <strong>{episode.title}</strong> }
+        <Progress>
           <span>{convertDurationToTimeString(progress)}</span>
-          <div className={styles.slider}>
+          <div className="slider">
             { episode ? (
               <Slider
                 max={episode.duration}
@@ -102,12 +107,12 @@ export function Player() {
                 handleStyle={{ borderColor: '#04d361', borderWidth: 4 }}
               />
             ) : (
-              <div className={styles.emptySlider} />
+              <div className="empty-slider" />
             ) }
             
           </div>
           <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>
-        </div>
+        </Progress>
 
         { episode && (
           <audio 
@@ -122,12 +127,12 @@ export function Player() {
           />
         ) }
 
-        <div className={styles.buttons}>
+        <Buttons>
           <button
             type="button"
             disabled={!episode || episodeList.length === 1}
             onClick={toggleShuffle}
-            className={isShuffling ? styles.isActive : ''}
+            className={isShuffling ? 'active' : ''}
           >
             <img src="/shuffle.svg" alt="Embaralhar"/>
           </button>
@@ -136,7 +141,7 @@ export function Player() {
           </button>
           <button
             type="button"
-            className={styles.playButton}
+            className="play-button"
             disabled={!episode}
             onClick={togglePlay}
           >
@@ -151,12 +156,12 @@ export function Player() {
             type="button"
             disabled={!episode}
             onClick={toggleLoop}
-            className={isLooping ? styles.isActive : ''}
+            className={isLooping ? 'active' : ''}
           >
             <img src="/repeat.svg" alt="Repetir"/>
           </button>
-        </div>
+        </Buttons>
       </footer>
-    </div>
+    </Container>
   )
 }

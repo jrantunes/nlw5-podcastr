@@ -1,23 +1,31 @@
+import { useState, useEffect } from 'react'
 import { AppProps } from 'next/app'
 import { Header } from '../components/Header'
 import { Player } from '../components/Player'
 
 import { PlayerContextProvider } from '../hooks/usePlayer'
+import { useTheme } from '../hooks/useTheme'
+import { ThemeProvider } from 'styled-components'
 
-import '../styles/global.scss'
-import styles from '../styles/app.module.scss'
+import { GlobalStyle } from '../styles/global'
+import { lightTheme, darkTheme } from '../styles/themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { theme, isDarkMode, toggleTheme } = useTheme()
+
   return (
-    <PlayerContextProvider>
-      <div className={styles.wrapper}>
-        <main>
-          <Header />
-          <Component {...pageProps} />
-        </main>
-        <Player />
-      </div>
-    </PlayerContextProvider>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <PlayerContextProvider>
+        <GlobalStyle />
+        <div className='wrapper'>
+          <main>
+            <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
+            <Component {...pageProps} />
+          </main>
+          <Player isDarkMode={isDarkMode} />
+        </div>
+      </PlayerContextProvider>
+    </ThemeProvider>
   )
 }
 

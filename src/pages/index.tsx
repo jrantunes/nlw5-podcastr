@@ -9,7 +9,7 @@ import { usePlayer } from '../hooks/usePlayer'
 import { api } from '../services/api'
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 
-import styles from './home.module.scss'
+import { Container, LatestEpisodes, EpisodeDetails, AllEpisodes } from '../styles/pages/home/styles'
 
 interface Episode {
   id: string;
@@ -33,12 +33,12 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   const episodeList = [...latestEpisodes, ...allEpisodes]
 
   return (
-    <div className={styles.homepage}>
+    <Container>
       <Head>
         <title>Home | Podcastr</title>
       </Head>
 
-      <section className={styles.latestEpisodes}>
+      <LatestEpisodes>
         <h2>Últimos lançamentos</h2>
 
         <ul>
@@ -52,14 +52,14 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 objectFit='cover'
               />
 
-              <div className={styles.episodeDetails}>
+              <EpisodeDetails>
                 <Link href={`/episodes/${episode.id}`}>
                   <a>{episode.title}</a>
                 </Link> 
                 <p>{episode.members}</p>
                 <span>{episode.publishedAt}</span>
                 <span>{episode.durationAsString}</span>
-              </div>
+              </EpisodeDetails>
 
               <button type='button' onClick={() => playList(episodeList, index)}>
                 <img src="/play-green.svg" alt="Tocar episódio"/>
@@ -67,19 +67,21 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             </li>
           )) }
         </ul>
-      </section>
+      </LatestEpisodes>
 
-      <section className={styles.allEpisodes}>
+      <AllEpisodes>
         <h2>Todos episódios</h2>
 
         <table cellSpacing={0}>
           <thead>
-            <th></th>
-            <th>Podcast</th>
-            <th>Integrantes</th>
-            <th>Data</th>
-            <th>Duração</th>
-            <th></th>
+            <tr>
+              <th></th>
+              <th>Podcast</th>
+              <th>Integrantes</th>
+              <th>Data</th>
+              <th>Duração</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             {allEpisodes.map((episode, index) => (
@@ -113,8 +115,8 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             ))}
           </tbody>
         </table>
-      </section>
-    </div>
+      </AllEpisodes>
+    </Container>
   )
 }
 
