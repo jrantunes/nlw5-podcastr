@@ -35,11 +35,11 @@ export const LatestEpisodes = styled.section`
         height: 6rem;
         border-radius: 1rem;
 
-        @media(max-width: 600px) {
+        /* @media(max-width: 600px) {
           width: 0;
           height: 0;
           border-radius: 0;
-        }
+        } */
       }
       
       button {
@@ -65,6 +65,21 @@ export const LatestEpisodes = styled.section`
           filter: brightness(0.95);
         }
       }
+
+      @media(max-width: 480px) {
+        border: 0;
+        padding: 0;
+        flex-direction: column;
+
+        > div {
+          margin: 0;
+          width: 100%;
+
+          img {
+            border-radius: 1rem 1rem 0 0; 
+          }
+        }
+      }
     }
 
     @media(max-width: 1719px) {
@@ -82,8 +97,6 @@ export const LatestEpisodes = styled.section`
       display: flex;
       flex-direction: column;
     }
-
-    
   }
 `
 
@@ -138,10 +151,12 @@ export const EpisodeDetails = styled.div`
   }
 
   @media(max-width: 480px) {
+    padding: 1.5rem;
     margin: 0;
 
     display: grid;
     grid-template-columns: 85% 15%;
+
     p,
     span {
       display: none;
