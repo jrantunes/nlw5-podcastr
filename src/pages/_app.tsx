@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div className='wrapper'>
           <main>
             <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
-            <Component {...pageProps} />
+            <Component {...pageProps} isDarkMode={isDarkMode} />
           </main>
           <Player isDarkMode={isDarkMode} />
         </div>

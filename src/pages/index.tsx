@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import { format, parseISO } from 'date-fns'
 
 import { usePlayer } from '../hooks/usePlayer'
+import { useTheme } from '../hooks/useTheme'
 import { api } from '../services/api'
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 
@@ -25,9 +26,10 @@ interface Episode {
 interface HomeProps {
   latestEpisodes: Episode[];
   allEpisodes: Episode[];
+  isDarkMode: boolean;
 }
 
-export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+export default function Home({ latestEpisodes, allEpisodes, isDarkMode }: HomeProps) {
   const { playList } = usePlayer()
 
   const episodeList = [...latestEpisodes, ...allEpisodes]
@@ -38,7 +40,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <title>Home | Podcastr</title>
       </Head>
 
-      <LatestEpisodes>
+      <LatestEpisodes isDarkMode={isDarkMode}>
         <h2>Últimos lançamentos</h2>
 
         <ul>

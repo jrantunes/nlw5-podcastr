@@ -11,7 +11,11 @@ export const Container = styled.div`
   }
 `
 
-export const LatestEpisodes = styled.section`
+interface LatestEpisodesProps {
+  isDarkMode: boolean;
+}
+
+export const LatestEpisodes = styled.section<LatestEpisodesProps>`
   ul {
     list-style: none;
     display: grid;
@@ -34,12 +38,6 @@ export const LatestEpisodes = styled.section`
         width: 6rem;
         height: 6rem;
         border-radius: 1rem;
-
-        /* @media(max-width: 600px) {
-          width: 0;
-          height: 0;
-          border-radius: 0;
-        } */
       }
       
       button {
@@ -67,9 +65,11 @@ export const LatestEpisodes = styled.section`
       }
 
       @media(max-width: 480px) {
-        border: 0;
+        border: ${ ({ isDarkMode }) => isDarkMode ? 0 : 1 };
         padding: 0;
         flex-direction: column;
+
+        transition: border 0.2s linear;
 
         > div {
           margin: 0;
