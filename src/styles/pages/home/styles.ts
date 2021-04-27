@@ -69,8 +69,6 @@ export const LatestEpisodes = styled.section<LatestEpisodesProps>`
         padding: 0;
         flex-direction: column;
 
-        transition: border 0.2s linear;
-
         > div {
           margin: 0;
           width: 100%;

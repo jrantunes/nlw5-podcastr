@@ -55,12 +55,6 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  @media(max-width: 500px) {
-    html {
-      font-size: 62.5%;
-    }
-  }
-
   body {
     background: ${({ theme }) => theme.body}; 
 
